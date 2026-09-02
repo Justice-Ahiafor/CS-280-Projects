@@ -10,11 +10,12 @@ public class BubbleSort extends SortingAlgorithm {
      * Post-Condition: "Array" is sorted in ascending order.
      * 
      * @param array an array of integers
-    
      */
     public void sort(Integer[] array) {
-        for (int k = array.length; k >= 2; k --) {       // k is the length of the sub-array we are looping through in the inner loop
-            for (int i = 0; i < k - 1; i ++) {           // go up to k - 1 because we dontg need to compare the last index against its neighbors
+        // k is the length of the sub-array we are looping through in the inner loop 
+        for (int k = array.length; k >= 2; k --) {
+            // Go up to k - 1 because we don't need to compare the last index against its neighbors
+            for (int i = 0; i < k - 1; i ++) {
                 if (array[i] > array[i + 1]) {
                     // Swap adjacent items (i and i + 1).
                     swap(array, i, i +  1);
@@ -37,14 +38,16 @@ public class BubbleSort extends SortingAlgorithm {
     }
 
     /**
-    Run validation tests.
-    @param args command-line args
-    */
+     * Run validation tests.
+     * @param args command-line args
+     */
+
     public static void main(String[] args) {
         SortingAlgorithm.validate(new BubbleSort());
         System.out.println("BubbleSort has passed all tests.");
 
 
+        
         // Fill an array with random numbers
         int N = 19999;
         Integer[] array = new Integer[N];
@@ -52,9 +55,11 @@ public class BubbleSort extends SortingAlgorithm {
             array[i] = (int)(N*Math.random());
         }
 
+        
         // Measuring runtime.
         SortingAlgorithm sorter = new BubbleSort();
         long start = System.nanoTime();
+
         sorter.sort(array);
         long end = System.nanoTime();
         double duration = (end - start)/(1e9);
@@ -63,5 +68,6 @@ public class BubbleSort extends SortingAlgorithm {
         System.out.println("Total duration: "+duration);
     }
 }
+
 // java -cp lib/* -ea src/assignments/sorting/BubbleSort.java 
 // Used to run the file!
