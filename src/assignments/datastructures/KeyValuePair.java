@@ -3,7 +3,6 @@ package assignments.datastructures;
 import adt.OrderedPair;
 
 /// An ordered pair representing a key-value pair.
-/// 
 /// The operationally signficant member of the KeyValuePair is the *key*.
 /// The *value* is just an extra bit of information attached to the key.
 /// Once set, the key cannot be changed. The value can be changed at any time.

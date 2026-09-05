@@ -3,7 +3,7 @@ package assignments.sorting;
 /**
  * BubbleSort swaps adjacent elements over and over until the whole array is sorted.
  */
-public class BubbleSort extends SortingAlgorithm {
+public class BubbleSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
     /**
      * Sort an array in-place using BubbleSort.
      * 
@@ -11,12 +11,12 @@ public class BubbleSort extends SortingAlgorithm {
      * 
      * @param array an array of integers
      */
-    public void sort(Integer[] array) {
+    public void sort(T[] array) {
         // k is the length of the sub-array we are looping through in the inner loop 
         for (int k = array.length; k >= 2; k --) {
             // Go up to k - 1 because we don't need to compare the last index against its neighbors
             for (int i = 0; i < k - 1; i ++) {
-                if (array[i] > array[i + 1]) {
+                if (array[i].compareTo(array[i + 1]) > 0) {
                     // Swap adjacent items (i and i + 1).
                     swap(array, i, i +  1);
                 } 
@@ -31,8 +31,8 @@ public class BubbleSort extends SortingAlgorithm {
      * @param j the second index to swap
      */
 
-    private void swap(Integer[] array, int i, int j) {
-        Integer temp = array[i];
+    private void swap(T[] array, int i, int j) {
+        T temp = array[i];
         array[i] = array[j];
         array[j] = temp; 
     }
@@ -43,7 +43,7 @@ public class BubbleSort extends SortingAlgorithm {
      */
 
     public static void main(String[] args) {
-        SortingAlgorithm.validate(new BubbleSort());
+        SortingAlgorithm.validate(new BubbleSort<Integer>());
         System.out.println("BubbleSort has passed all tests.");
 
 
@@ -55,9 +55,8 @@ public class BubbleSort extends SortingAlgorithm {
             array[i] = (int)(N*Math.random());
         }
 
-        
         // Measuring runtime.
-        SortingAlgorithm sorter = new BubbleSort();
+        SortingAlgorithm<Integer> sorter = new BubbleSort<Integer>();
         long start = System.nanoTime();
 
         sorter.sort(array);
