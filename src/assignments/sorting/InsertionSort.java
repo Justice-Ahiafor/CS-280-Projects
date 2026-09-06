@@ -24,6 +24,13 @@ public class InsertionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
             array[j + 1] = FirstValue;
         }
     }
+    /**
+     * Puttimg elements one-by-one into a guaranteed sorted list
+     * Key features:
+     * a. Maintain a sub-array which is always sorted in each iteration.
+     * b. A new item has been put in the correct spot.
+     * @param args
+     */
 
     /**
      * Run validation tests.
