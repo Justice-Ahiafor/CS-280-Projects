@@ -12,15 +12,23 @@ public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
     public void sort(T[] array) {
         
         for (int k = 0; k < array.length - 1; k ++ ) {
-            int Smallest_Element = k;        // Assume the smallest element is at index k.
+            int SmallestElement = k;        
+            /* 
+             * Assume the smallest element is at index k.
+             */
            
             for (int i = k + 1; i < array.length; i ++) {
-                if (array[i].compareTo(array[Smallest_Element]) < 0) {
-                    Smallest_Element = i;    // Updates the array to the smallest element as it goes.
+                if (array[i].compareTo(array[SmallestElement]) < 0) {
+                    SmallestElement = i;    
+                    /*
+                     * Updates the array to the smallest element as it goes.
+                     */
                 }
             }
-            //Swap with the smallest element
-            swap(array, k, Smallest_Element);
+            /* 
+             * Swap with the smallest element
+             */
+            swap(array, k, SmallestElement);
         }
 
     }
@@ -47,14 +55,18 @@ public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
         SortingAlgorithm.validate(new SelectionSort<Integer>());
         System.out.println("SelectionSort has passed all tests.");
 
-        // Fill an array with random numbers
+        /*
+         * Fill an array with random numbers
+         */
         int N = 19999;
         Integer[] array = new Integer[N];
         for (int i = 0; i < array.length; i ++) {
             array[i] = (int)(N*Math.random());
         }
         
-        // Measuring runtime.
+        /*
+         * Measuring runtime.
+         */
         SortingAlgorithm<Integer> sorter = new SelectionSort<Integer>();
         long start = System.nanoTime();
 
