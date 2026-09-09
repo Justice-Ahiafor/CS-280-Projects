@@ -12,17 +12,17 @@ public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
     public void sort(T[] array) {
         
         for (int k = 0; k < array.length - 1; k ++ ) {
-            int SmallestElement = k;        
+            int smallestElement = k;        
             // Assume the smallest element is at index k.
            
             for (int i = k + 1; i < array.length; i ++) {
-                if (array[i].compareTo(array[SmallestElement]) < 0) {
-                    SmallestElement = i;    
+                if (array[i].compareTo(array[smallestElement]) < 0) {
+                    smallestElement = i;    
                     // Updates the array to the smallest element as it goes.
                 }
             }
             // Swap with the smallest element
-            swap(array, k, SmallestElement);
+            swap(array, k, smallestElement);
         }
 
     }

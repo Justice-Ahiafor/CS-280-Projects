@@ -36,6 +36,7 @@ public class Test {
         // Test data structures.
         KeyValuePair.main(args);
         /* Call additional main routines as you create new data strutures. */
+        Vector.main(args);
 
         return true;
     }
