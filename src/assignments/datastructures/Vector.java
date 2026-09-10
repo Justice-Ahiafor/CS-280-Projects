@@ -97,6 +97,10 @@ public class Vector<T> implements List<T> {
         assert 0 <= index && index <= this.size;
 
         // TODO implement this method
+        // If in case the array buffer gets full, to resize it, I'm just going to double its capacity
+        if (this.size == this.array.length) {
+            resize(this.array.length * 2);
+        }
         /*
          * Shift all the members one spot to the right
          * and insert the new value in that spot
@@ -106,6 +110,7 @@ public class Vector<T> implements List<T> {
         }
         // inserts the new value
         this.array[index] = value;
+        // Increases the size of the buffer
         this.size ++;
     }
     
