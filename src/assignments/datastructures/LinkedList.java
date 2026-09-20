@@ -196,8 +196,8 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
     /** 
      * Create an iterator that walks through the LinkedList for one node at a time
      * The iterator starts at the head of the list and moves forward by following each node
-     * The hasNext() checks if there is a node next
-     * The next() returns the value of the initialNode then moves to the next
+     * The hasNext() method checks if there is a node next
+     * The next() method returns the value of the initialNode then moves to the next
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -218,7 +218,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      * Run validation tests.
      * @param args command-line args
      */
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         List.validate(new LinkedList<>());
 
         // Test iterator.

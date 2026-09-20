@@ -163,7 +163,6 @@ public class Vector<T> implements List<T>, Iterable<T> {
      * It starts at initialIndex 0 and moves through the array until it reaches the size
      * The hasNext() method checks if there is more elements and returns a boolean expression
      * the next() method return the value at initialIndex before moving forward
-     * @param args
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
