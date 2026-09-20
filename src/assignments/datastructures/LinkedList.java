@@ -1,5 +1,6 @@
 package assignments.datastructures;
 
+import java.util.Iterator;
 import adt.List;
 
 /// An extensible list backed by a chain of nodes.
@@ -14,7 +15,7 @@ import adt.List;
 ///  one must first traverse through the chain of nodes from the beginning of the list.
 /// 
 /// @param <T> the type of each element
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> implements List<T>, Iterable<T> {
     private Node head;
     private int size;
 
@@ -73,7 +74,7 @@ public class LinkedList<T> implements List<T> {
         for (int i = 0; i < index; i ++) {
             initialNode = initialNode.link;
         }
-        // Set the index at the element equal to the value
+        // Once found, set the index at the element equal to the value
         initialNode.data = value;
     }
     
@@ -192,13 +193,41 @@ public class LinkedList<T> implements List<T> {
             this.link = link;
         }
     }
+    /** 
+     * Create an iterator that walks through the LinkedList for one node at a time
+     * The iterator starts at the head of the list and moves forward by following each node
+     * The hasNext() checks if there is a node next
+     * The next() returns the value of the initialNode then moves to the next
+     */
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            Node initialNode = head;    // Starts at the head
+
+            public boolean hasNext() {  // Checks if there is still a node
+                return initialNode != null;
+            }
+            public T next() {           // Returns the node's data then moves to the next one
+                T value = initialNode.data;
+                initialNode = initialNode.link;
+                return value;
+            }
+        };
+    }
 
     /**
      * Run validation tests.
      * @param args command-line args
      */
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         List.validate(new LinkedList<>());
+
+        // Test iterator.
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i = 0; i < 5; i ++) list.insert(0, i);
+        Iterator<Integer> iter = list.iterator();
+        for (int i = 5; i > 0; i --) assert iter.next().equals(i-1);
+        assert !iter.hasNext();
+
         System.out.println("LinkedList passes all tests.");
     }
 }
