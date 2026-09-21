@@ -161,10 +161,11 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
     }
     /**
      * Creates an iterator that goes step by step through the vector
-     * It starts at initialIndex 0 and moves through the array until it reaches the size
-     * The hasNext() method checks if there is more elements and returns a boolean expression
-     * the next() method return the value at initialIndex before moving forward
-     * @return iterator that produces items in a vector from first to last
+     * 
+     * The iterator visit items in forward order, starting with element at index 0 and
+     *  continues until all the elemnts have been done
+     *
+     * @return an iterator that produces items in a vector from first to last
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -183,24 +184,35 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
     }
     /**
      * Stack implementation
+     */
+     
+    /** 
      * Checks whether the stack isEmpty, and return true or false
-     * Peek() reports the next item to be removed
-     * Pop() removes the item from the stack
-     * push(T value) add an item to the stack
-     * @return
+     * @return true if stack is empty, otherwise false
      */
     public boolean isEmpty() {
         return this.size == 0;      // Returns True when the size is equal to 0
     }
+    /**
+     * Peek() reports the next item to be removed
+     * @return the item that is most recently push to the stack
+     */
     public T peek() {
         return this.array[this.size - 1];   // The top is the last element in, so its like the index size - 1
     }
+    /**
+     * Pop() removes the item from the stack
+     * @return the item that is most recently push to the stack
+     */
     public T pop() {
             T value = this.array[this.size - 1];    // Again the top is at index size - 1
             this.size --;                           // Reduce the size by 1 so its removed
             return value;                           // Give me the return value
         }
-    
+     /**
+     * push(T value) add an item to the stack 
+     * @param value the element to be pushed to the stack
+     */
     public void push(T value) {
         insert(this.size, value);   // The top is the end of the vector like the diagram on the board and so I just insert at index size
     }

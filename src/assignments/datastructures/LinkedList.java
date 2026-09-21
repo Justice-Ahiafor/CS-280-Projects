@@ -195,11 +195,12 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
         }
     }
     /** 
-     * Create an iterator that walks through the LinkedList for one node at a time
-     * The iterator starts at the head of the list and moves forward by following each node
-     * The hasNext() method checks if there is a node next
-     * The next() method returns the value of the initialNode then moves to the next
-     * @return iterator that produces list from first to last
+     * Creates an iterator that goes step by step through the vector
+     * 
+     * The iterator visit items in forward order, starting with the first element in the list and
+     *  continues until all the elements have been done
+     *
+     * @return an iterator that produces items in a list from first to last
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -215,29 +216,39 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
             }
         };
     }
+
     /**
      * Stack implementation
+     */
+
+    /**    
      * Checks whether the stack isEmpty, and return true or false
      * @return true or false if stack has nothing or has something respectively
-     * Peek() reports the next item to be removed
-     * @return the item that is most recently push to the stack
-     * Pop() removes the item from the stack
-     * @return the item that is most recently push to the stack
-     * push(T value) add an item to the stack 
-     * @param value the new value is pushed to the stack
      */
     public boolean isEmpty() {
         return this.size == 0;  // Returns true if the stack has no items, otherwise it returns false
     }
+    /**
+     * Peek() reports the next item to be removed
+     * @return the item that is most recently push to the stack
+     */
     public T peek() {
         return this.head.data;   // The top is the last element in, so it returns the head of the node
     }
+    /**
+     * Pop() removes the item from the stack
+     * @return the item that is most recently push to the stack
+     */
     public T pop() {
         T value =this.head.data;    // Save the top value
         this.head = this.head.link; // Move the heaf forward
         this.size --;               // The size is reduced
         return value;
     }
+    /**
+     * push(T value) add an item to the stack 
+     * @param value the element to be pushed to the stack
+     */
     public void push(T value) {
         this.head = new Node(value, this.head);     // New node points to the old head
         this.size ++;                               // To increase the size
