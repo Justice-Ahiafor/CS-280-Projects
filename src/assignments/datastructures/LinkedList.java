@@ -2,6 +2,7 @@ package assignments.datastructures;
 
 import java.util.Iterator;
 import adt.List;
+import adt.Stack;
 
 /// An extensible list backed by a chain of nodes.
 /// 
@@ -15,7 +16,7 @@ import adt.List;
 ///  one must first traverse through the chain of nodes from the beginning of the list.
 /// 
 /// @param <T> the type of each element
-public class LinkedList<T> implements List<T>, Iterable<T> {
+public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
     private Node head;
     private int size;
 
@@ -198,6 +199,7 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
      * The iterator starts at the head of the list and moves forward by following each node
      * The hasNext() method checks if there is a node next
      * The next() method returns the value of the initialNode then moves to the next
+     * @return iterator that produces list from first to last
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -213,13 +215,42 @@ public class LinkedList<T> implements List<T>, Iterable<T> {
             }
         };
     }
-
+    /**
+     * Stack implementation
+     * Checks whether the stack isEmpty, and return true or false
+     * @return true or false if stack has nothing or has something respectively
+     * Peek() reports the next item to be removed
+     * @return the item that is most recently push to the stack
+     * Pop() removes the item from the stack
+     * @return the item that is most recently push to the stack
+     * push(T value) add an item to the stack 
+     * @param value the new value is pushed to the stack
+     */
+    public boolean isEmpty() {
+        return this.size == 0;  // Returns true if the stack has no items, otherwise it returns false
+    }
+    public T peek() {
+        return this.head.data;   // The top is the last element in, so it returns the head of the node
+    }
+    public T pop() {
+        T value =this.head.data;    // Save the top value
+        this.head = this.head.link; // Move the heaf forward
+        this.size --;               // The size is reduced
+        return value;
+    }
+    public void push(T value) {
+        this.head = new Node(value, this.head);     // New node points to the old head
+        this.size ++;                               // To increase the size
+    }
+    
     /**
      * Run validation tests.
      * @param args command-line args
      */
     public static void main(String[] args) {
         List.validate(new LinkedList<>());
+        Stack.validate(new LinkedList<>());
+
 
         // Test iterator.
         LinkedList<Integer> list = new LinkedList<>();

@@ -2,6 +2,7 @@ package assignments.datastructures;
 
 import java.util.Iterator;
 import adt.List;
+import adt.Stack;
 
 /// An extensible list backed by an array buffer.
 /// 
@@ -14,7 +15,7 @@ import adt.List;
 /// This is a very expensive operation, so you want to make sure it occurs very infrequently.
 /// 
 /// @param <T> the type of each element
-public class Vector<T> implements List<T>, Iterable<T> {
+public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
     /** The initial amount of buffer space in a newly-created vector. */
     public static final int INITIAL_BUFFER_SIZE = 10;
     private T[] array;
@@ -163,6 +164,7 @@ public class Vector<T> implements List<T>, Iterable<T> {
      * It starts at initialIndex 0 and moves through the array until it reaches the size
      * The hasNext() method checks if there is more elements and returns a boolean expression
      * the next() method return the value at initialIndex before moving forward
+     * @return iterator that produces items in a vector from first to last
      */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -179,6 +181,29 @@ public class Vector<T> implements List<T>, Iterable<T> {
             
         };
     }
+    /**
+     * Stack implementation
+     * Checks whether the stack isEmpty, and return true or false
+     * Peek() reports the next item to be removed
+     * Pop() removes the item from the stack
+     * push(T value) add an item to the stack
+     * @return
+     */
+    public boolean isEmpty() {
+        return this.size == 0;      // Returns True when the size is equal to 0
+    }
+    public T peek() {
+        return this.array[this.size - 1];   // The top is the last element in, so its like the index size - 1
+    }
+    public T pop() {
+            T value = this.array[this.size - 1];    // Again the top is at index size - 1
+            this.size --;                           // Reduce the size by 1 so its removed
+            return value;                           // Give me the return value
+        }
+    
+    public void push(T value) {
+        insert(this.size, value);   // The top is the end of the vector like the diagram on the board and so I just insert at index size
+    }
 
     /**
      * Run validation tests.
@@ -186,7 +211,7 @@ public class Vector<T> implements List<T>, Iterable<T> {
      */
     public static void main(String[] args) {
         List.validate(new Vector<>());
-
+        Stack.validate(new Vector<>());
         // Test iterator.
         Vector<Integer> vector = new Vector<>();
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i ++) vector.insert(0, i);
