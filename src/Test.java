@@ -38,6 +38,7 @@ public class Test {
         /* Call additional main routines as you create new data strutures. */
         Vector.main(args);
         LinkedList.main(args);
+        CircularLinkedList.main(args);
 
         return true;
     }
