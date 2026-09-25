@@ -1,6 +1,7 @@
 package assignments.datastructures;
 
 import adt.List;
+import adt.Queue;
 import java.util.Iterator;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Iterator;
  * 
  * @param <T> the type of each element
  */
-public class CircularLinkedList<T> implements List<T>, Iterable<T> {
+public class CircularLinkedList<T> implements List<T>, Iterable<T>, Queue<T> {
     private  Node tail;             // Last node, tail.links is the head
     private int size;
 
@@ -36,7 +37,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public T at(int index) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
 
         Node initialNode = tail.link;
 
@@ -52,7 +52,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public void set(int index, T value) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
         
         Node initialNode = tail.link;
 
@@ -67,7 +66,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        // TODO implement this method
 
         if (tail == null) {
             return false;
@@ -96,7 +94,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public T delete(int index) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
 
         T removedValue;
         
@@ -135,7 +132,6 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public void insert(int index, T value) {
         assert 0 <= index && index <= this.size;
-        // TODO implement this method
 
         // Empty List
         if (this.size == 0) {
@@ -210,6 +206,37 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
         };
     }
     /**
+     * Implementing Queues: A collection designed for holding elements prior to processing.
+     */
+    /**    
+     * Checks whether the queue isEmpty, and return true or false
+     * @return true or false if stack has nothing or has something respectively
+     */
+    public boolean isEmpty() {
+        return this.size == 0;  // Returns true if the queue has no items, otherwise it returns false
+    }
+    /**
+     * Peek() reports the next item to be removed
+     * @return the item that is most recently push to the queue
+     */
+    public T peek() {
+        return this.tail.link.data;
+    }
+    /**
+     * dequeue() removes the item from the queue
+     * @return the item that is most recently push to the queue
+     */
+    public T dequeue() {
+       return delete(0);
+    }
+    /**
+     * enqueue(T value) add an item to the queue 
+     * @param value the element to be pushed to the queue
+     */
+    public void enqueue(T value) {
+       insert(size, value);
+    }
+    /**
      * Node class for CircularLinkedList
      */
     private class Node {
@@ -232,6 +259,7 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T> {
      */
     public static void main(String[] args) {
         List.validate(new CircularLinkedList<>());
+        Queue.validate(new CircularLinkedList<>());
 
         // Test iterator.
         CircularLinkedList<Integer> list = new CircularLinkedList<>();

@@ -205,9 +205,12 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      * @return the item that is most recently push to the stack
      */
     public T pop() {
+        /*
             T value = this.array[this.size - 1];    // Again the top is at index size - 1
             this.size --;                           // Reduce the size by 1 so its removed
             return value;                           // Give me the return value
+            */
+           return delete(this.size - 1);
         }
      /**
      * push(T value) add an item to the stack 

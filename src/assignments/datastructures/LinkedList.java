@@ -240,18 +240,24 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      * @return the item that is most recently push to the stack
      */
     public T pop() {
+        /*
         T value =this.head.data;    // Save the top value
         this.head = this.head.link; // Move the heaf forward
         this.size --;               // The size is reduced
         return value;
+        */
+       return delete(0);
     }
     /**
      * push(T value) add an item to the stack 
      * @param value the element to be pushed to the stack
      */
     public void push(T value) {
+        /*
         this.head = new Node(value, this.head);     // New node points to the old head
         this.size ++;                               // To increase the size
+        */
+       insert(0, value);
     }
     
     /**
