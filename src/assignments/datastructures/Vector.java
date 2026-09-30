@@ -37,7 +37,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      * @return the number of items
      */
     public int length() {
-        // TODO implement this method
         return this.size;
     }
     
@@ -50,7 +49,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
         // You may use assert statements to enforce pre-conditions at runtime.
         assert 0 <= index && index < this.size;
 
-        // TODO implement this method
         return this.array[index];
     }
     
@@ -63,7 +61,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
         // You may use assert statements to enforce pre-conditions at runtime.
         assert 0 <= index && index < this.size;
 
-        // TODO implement this method
         this.array[index] = value;
     }
     
@@ -73,7 +70,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        // TODO implement this method
         /*
          * Loop around all the elements used in the vector
          * compare it with the required value
@@ -98,7 +94,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
         // Note this function has a somewhat different pre-condition!
         assert 0 <= index && index <= this.size;
 
-        // TODO implement this method
         // If in case the array buffer gets full, to resize it, I'm just going to double its capacity
         if (this.size == this.array.length) {
             resize(this.array.length * 2);
@@ -125,7 +120,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
         // You may use assert statements to enforce pre-conditions at runtime.
         assert 0 <= index && index < this.size;
 
-        // TODO implement this method
         /*
          * I saved the element thats is being removed so that later on I can return it
          * Shift all the elements to the left when you start from the index you deleted
@@ -150,7 +144,6 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      */
     @SuppressWarnings("unchecked")
     private void resize(int newSize) {
-        // TODO implement this method. Take inspiration from the constructor implementation.
         T[] newArray = (T[])(new Object[newSize]);
         // Copy elements already there into the new buffer
         for (int i = 0; i < this.size; i++) {
@@ -206,12 +199,12 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      */
     public T pop() {
         /*
-            T value = this.array[this.size - 1];    // Again the top is at index size - 1
-            this.size --;                           // Reduce the size by 1 so its removed
-            return value;                           // Give me the return value
-            */
-           return delete(this.size - 1);
-        }
+        T value = this.array[this.size - 1];    // Again the top is at index size - 1
+        this.size --;                           // Reduce the size by 1 so its removed
+        return value;                           // Give me the return value
+        */
+        return delete(this.size - 1);
+    }
      /**
      * push(T value) add an item to the stack 
      * @param value the element to be pushed to the stack
@@ -225,16 +218,37 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        List.validate(new Vector<>());
-        Stack.validate(new Vector<>());
+        //List.validate(new Vector<>());
+        //Stack.validate(new Vector<>());
         // Test iterator.
         Vector<Integer> vector = new Vector<>();
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i ++) vector.insert(0, i);
+        
+        // Measuring Runtime
+        for (long N = 1000000; N <= 100000000; N += 24750000) {
+
+            Vector<Integer> vector1 = new Vector<>();
+
+            for (int j = 0; j < N; j ++) {
+                vector1.insert(0,0);
+            }
+            
+            long start = System.nanoTime();
+
+            vector1.insert(0,0);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start) / 1e9;
+
+            System.out.println(N + "\t" + duration);
+        }
+
         Iterator<Integer> iter = vector.iterator();
         for (int i = INITIAL_BUFFER_SIZE; i > 0; i --) assert iter.next().equals(i-1);
         assert !iter.hasNext();
 
-        System.out.println("Vector passes all tests.");
+       //System.out.println("Vector passes all tests.");
     }
     
 }

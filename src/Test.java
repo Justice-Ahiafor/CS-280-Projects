@@ -32,6 +32,7 @@ public class Test {
         /* Call additional main routines here as you create new sorting algorithms. */
         SelectionSort.main(args);
         InsertionSort.main(args);
+        QuickSort.main(args);
 
         // Test data structures.
         KeyValuePair.main(args);

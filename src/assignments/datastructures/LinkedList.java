@@ -33,7 +33,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      * @return the number of items
      */
     public int length() {
-        // TODO implement this method
         return this.size;
     }
     
@@ -44,7 +43,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      */
     public T at(int index) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
 
         // To get to the specific index you need,
         //  you have to start from the beginning and go one step at a time.
@@ -65,7 +63,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      */
     public void set(int index, T value) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
         
         // To get to the specific index you need to be changed,
         //  you have to start from the beginning and go one step at a time.
@@ -85,7 +82,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        // TODO implement this method
 
         // To make sure the list contains the value,
         //  you have to start from the beginning and go one step at a time.
@@ -121,7 +117,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      */
     public void insert(int index, T value) {
         assert 0 <= index && index <= this.size;
-        // TODO implement this method
 
         // If you have to insert the value at index 0
         if (index == 0) {
@@ -151,7 +146,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      */
     public T delete(int index) {
         assert 0 <= index && index < this.size;
-        // TODO implement this method
 
         T removedValue;         // This is just to hold what I'm deleting
         
@@ -240,12 +234,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      * @return the item that is most recently push to the stack
      */
     public T pop() {
-        /*
-        T value =this.head.data;    // Save the top value
-        this.head = this.head.link; // Move the heaf forward
-        this.size --;               // The size is reduced
-        return value;
-        */
        return delete(0);
     }
     /**
@@ -253,10 +241,6 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
      * @param value the element to be pushed to the stack
      */
     public void push(T value) {
-        /*
-        this.head = new Node(value, this.head);     // New node points to the old head
-        this.size ++;                               // To increase the size
-        */
        insert(0, value);
     }
     
@@ -272,6 +256,27 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
         // Test iterator.
         LinkedList<Integer> list = new LinkedList<>();
         for (int i = 0; i < 5; i ++) list.insert(0, i);
+         
+        // Measuring Runtime
+        for (int N = 0; N <= 340000000; N += 20000000) {
+
+            LinkedList<Integer> LinkedList1 = new LinkedList<>();
+            
+            for (int j = 0; j < N; j ++) {
+                LinkedList1.insert(0,0);
+            }
+
+            long start = System.nanoTime();
+
+            LinkedList1.insert(0,0);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start) / 1e9;
+
+            System.out.println(N + "\t" + duration);
+        }
+
         Iterator<Integer> iter = list.iterator();
         for (int i = 5; i > 0; i --) assert iter.next().equals(i-1);
         assert !iter.hasNext();

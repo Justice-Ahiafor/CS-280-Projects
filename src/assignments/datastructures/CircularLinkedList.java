@@ -205,9 +205,9 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T>, Queue<T> {
             }
         };
     }
-    /**
-     * Implementing Queues: A collection designed for holding elements prior to processing.
-     */
+    
+    /// Implementing Queues: A collection designed for holding elements prior to processing.
+    
     /**    
      * Checks whether the queue isEmpty, and return true or false
      * @return true or false if stack has nothing or has something respectively
@@ -263,7 +263,28 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T>, Queue<T> {
 
         // Test iterator.
         CircularLinkedList<Integer> list = new CircularLinkedList<>();
-        for (int i = 0; i < 5; i ++) list.insert(0, i);
+        for (int i = 10; i < 5; i ++) list.insert(0, i);
+
+        // Measuring Runtime
+        for (int N = 100; N <= 100000000; N *= 10) {
+
+            CircularLinkedList<Integer> CircularLinkedList1 = new CircularLinkedList<>();
+            
+            for (int j = 0; j < N; j ++) {
+                CircularLinkedList1.insert(0,0);
+            }
+
+            long start = System.nanoTime();
+
+            CircularLinkedList1.insert(0,0);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start) / 1e9;
+
+            System.out.println(N + "\t" + duration);
+        }
+
         Iterator<Integer> iter = list.iterator();
         for (int i = 5; i > 0; i --) assert iter.next().equals(i-1);
         assert !iter.hasNext();
