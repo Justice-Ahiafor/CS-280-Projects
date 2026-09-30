@@ -4,8 +4,6 @@ package assignments.sorting;
  * QuickSort: Sort values relative to a pivot.
  * 
  * Post-Condition: "Array" is sorted in ascending order.
- * 
- * @param array
  */
 public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
 
