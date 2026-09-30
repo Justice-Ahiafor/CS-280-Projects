@@ -263,7 +263,7 @@ public class CircularLinkedList<T> implements List<T>, Iterable<T>, Queue<T> {
 
         // Test iterator.
         CircularLinkedList<Integer> list = new CircularLinkedList<>();
-        for (int i = 10; i < 5; i ++) list.insert(0, i);
+        for (int i = 0; i < 5; i ++) list.insert(0, i);
 
         // Measuring Runtime
         /*for (int N = 100; N <= 100000000; N *= 10) {
