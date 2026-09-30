@@ -62,7 +62,7 @@ public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
         System.out.println("QuickSort has passed all tests.");
 
         // Fill an array with random numbers
-        /*int N = 19999;
+        int N = 19999;
         Integer[] array = new Integer[N];
         for (int i = 0; i < array.length; i ++) {
             array[i] = (int)(N*Math.random());
@@ -78,7 +78,7 @@ public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
 
         System.out.println("Array size: "+N);
         System.out.println("Total duration: "+duration);
-        */
+        
     }    
 
 }
