@@ -225,7 +225,7 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
         for (int i = 0; i < INITIAL_BUFFER_SIZE; i ++) vector.insert(0, i);
         
         // Measuring Runtime
-        for (long N = 1000000; N <= 100000000; N += 24750000) {
+        /*for (long N = 1000000; N <= 100000000; N += 24750000) {
 
             Vector<Integer> vector1 = new Vector<>();
 
@@ -243,6 +243,7 @@ public class Vector<T> implements List<T>, Iterable<T>, Stack<T> {
 
             System.out.println(N + "\t" + duration);
         }
+        */
 
         Iterator<Integer> iter = vector.iterator();
         for (int i = INITIAL_BUFFER_SIZE; i > 0; i --) assert iter.next().equals(i-1);

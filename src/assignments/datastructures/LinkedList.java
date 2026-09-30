@@ -258,7 +258,7 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
         for (int i = 0; i < 5; i ++) list.insert(0, i);
          
         // Measuring Runtime
-        for (int N = 0; N <= 340000000; N += 20000000) {
+        /*for (int N = 0; N <= 340000000; N += 20000000) {
 
             LinkedList<Integer> LinkedList1 = new LinkedList<>();
             
@@ -276,6 +276,7 @@ public class LinkedList<T> implements List<T>, Iterable<T>,Stack<T> {
 
             System.out.println(N + "\t" + duration);
         }
+        */
 
         Iterator<Integer> iter = list.iterator();
         for (int i = 5; i > 0; i --) assert iter.next().equals(i-1);
