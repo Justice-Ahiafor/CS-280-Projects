@@ -33,6 +33,7 @@ public class Test {
         SelectionSort.main(args);
         InsertionSort.main(args);
         QuickSort.main(args);
+        MergeSort.main(args);
 
         // Test data structures.
         KeyValuePair.main(args);
