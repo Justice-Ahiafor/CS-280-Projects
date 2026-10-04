@@ -1,68 +1,82 @@
 package assignments.sorting;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * MergeSort: split data into subgroups and recursively merge them.
  * 
- * Post-Condition: "List" is sorted in ascending order.
+ * Post-Condition: "Array" is sorted in ascending order.
  * 
+ * @param <T> the type of element to be sorted
  */
-public class MergeSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
+public class MergeSort<T extends Comparable<T>> extends SortingAlgorithm<T>{
+    /**
+     * sorts the whole array in ascending order
+     * 
+     * @param array the array to be sorted
+     */
     public void sort(T[] array) {
-        if (array == null || array.length <= 1) return;
+        // Allocate a working array
+        @SuppressWarnings("unchecked")
+        T[] workingArray = (T[]) new Comparable[array.length];
 
-        // Convert the array to an ArrayList that way I can use
-        List<T> list = new ArrayList<>(List.of(array));
-
-        // Call recursive list sorting method
-        sort(list);
-
-        // Write the sorted elemnts back into the array
-        for (int i = 0; i < array.length; i++) {
-            array[i] = list.get(i);
-        }
+        sort(array, workingArray, 0, array.length - 1);
     }
+    /**
+     * Sorts the section of the array recursively
+     * 
+     * @param array the array to be sorted
+     * @param workingArray the temporary buffer array
+     * @param leftHandSide the starting index of the partition
+     * @param rightHandSide the ending index of the partition
+     */
+    private void sort(T[] array, T[] workingArray, int leftHandSide, int rightHandSide) {
+        // Base case: If there is only one element in the array, its already sorted
+        if (leftHandSide >= rightHandSide) return;
 
-    public void sort(List<T> list) {
-        // Base case: If the list has 0 or 1 elements
-        if (list.size() <= 1) return;
+        // Determining the midde
+        int middle = (leftHandSide + rightHandSide) / 2;
 
-        // Split the list into two
-        int middle = list.size() / 2;
+        // Sort the left half and the right half
+        sort(array, workingArray, leftHandSide, middle);          // Left
+        sort(array, workingArray, middle + 1, rightHandSide);     // Right
 
-        // Split into 2 and create a new ArrayList
-        List<T> leftHandSide = new ArrayList<>(list.subList(0, middle));
-        List<T> rightHandSide = new ArrayList<>(list.subList(middle, list.size()));
-
-        // Now you can sort it recursively
-        sort(leftHandSide);
-        sort(rightHandSide);
-        
-        // Merge both list together now
-        merge(list, leftHandSide, rightHandSide);
+        //Merge the sorted halves
+        merge(array, workingArray, leftHandSide, middle, rightHandSide);
     }
-    private void merge(List<T> complete, List<T>leftHandSide, List<T>rightHandSide) {
-        int i = 0;
-        int j = 0;
-        int k = 0;
+    /**
+     * Merges the two sorted partitions back together
+     * 
+     * @param array the array to be sorted
+     * @param workingArray the temporary buffer array
+     * @param leftHandSide the starting index of the left half
+     * @param midde the ending index of the left half
+     * @param rightHandSide the ending index of the right half
+     */
+    private void merge(T[] array, T[] workingArray, int leftHandSide, int midde, int rightHandSide) {
 
-        // Compare elements from the left and right hand sides
-        while (i < leftHandSide.size() && j < rightHandSide.size()) {
-            if (leftHandSide.get(i).compareTo(rightHandSide.get(j)) <= 0) {
-                complete.set(k ++, leftHandSide.get(i ++));
+        int i = leftHandSide;
+        int j = midde + 1;
+        int k = leftHandSide;
+
+        // Now I get to compare the elements from both halves and copy the smaller one
+        while (i <= midde && j <= rightHandSide) {
+            if (array[i].compareTo(array[j]) <= 0) {
+                workingArray[k ++] = array[i ++];
             }
             else {
-                complete.set(k ++, rightHandSide.get(j ++));
+                workingArray[k ++] = array[j ++];
             }
         }
-        // Now copy the remaining elements from the left and the right hand sides
-        while (i < leftHandSide.size()) {
-            complete.set(k ++, leftHandSide.get(i ++));
+        // Now copy the remaining elements from the left half
+        while (i <= midde) {
+            workingArray[k ++] = array[i ++];            
         }
-        while (j < rightHandSide.size()) {
-            complete.set(k ++, rightHandSide.get(j ++));
+        // Now copy the remaining elements from the right half
+        while (j <= rightHandSide) {
+            workingArray[k ++] = array[j ++];
+        }
+        // Now copy the merged elements back into the original array
+        for (int x = leftHandSide; x <= rightHandSide; x ++) {
+            array[x] = workingArray[x];
         }
     }
     /*
@@ -74,9 +88,8 @@ public class MergeSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
      *     cursor to next item in the half you just took from)
      * e. Until complete one half is totally used up or has been added to our newList
      * f. Bring in other half in other
-     * 
-     * g. Overwrite the array with the sorted elements from the list
      */
+    
     /**
      * Run validation tests.
      * @param args command-line args
@@ -84,5 +97,5 @@ public class MergeSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
     public static void main(String[] args) {
         SortingAlgorithm.validate(new MergeSort<Integer>());
         System.out.println("MergeSort has passed all tests.");
-    }
+    }  
 }

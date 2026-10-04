@@ -4,14 +4,26 @@ package assignments.sorting;
  * QuickSort: Sort values relative to a pivot.
  * 
  * Post-Condition: "Array" is sorted in ascending order.
+ * 
+ * @param <T> the type of element to be sorted
  */
 public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
-
+    /**
+     * Sorts the whole array in ascending order
+     * 
+     * @param array the array to be sorted
+     */
     public void sort(T[] array) {
         sort(array, 0, array.length - 1);
     }
-
-    public void sort(T[] array, int leftHandSide, int rightHandSide) {
+    /**
+     * Sorts the section of the array recursively
+     * 
+     * @param array the array to be sorted
+     * @param leftHandSide the starting index of the partition
+     * @param rightHandSide the ending index of the partition
+     */
+    private void sort(T[] array, int leftHandSide, int rightHandSide) {
         // Base Case: if the partition has 0 or 1 element, its already sorted
         if (leftHandSide < rightHandSide) {
             // Choose a pivot to partition the array 
@@ -22,6 +34,14 @@ public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
             sort(array, pivot + 1, rightHandSide);
         }
     }
+    /**
+     * sorts the array around the first element as the pivot
+     * 
+     * @param array the array to be partitioned
+     * @param leftHandSide the starting index
+     * @param rightHandSide the ending index
+     * @return the final spot of the pivot
+     */
     private int mySort(T[] array, int leftHandSide, int rightHandSide) {
         T pivot = array[leftHandSide];        // Let the first index be the pivot
         int known = leftHandSide;
