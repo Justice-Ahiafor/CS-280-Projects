@@ -41,6 +41,7 @@ public class Test {
         Vector.main(args);
         LinkedList.main(args);
         CircularLinkedList.main(args);
+        BinarySearchTree.main(args);
 
         return true;
     }
