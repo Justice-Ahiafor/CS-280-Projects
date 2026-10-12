@@ -42,6 +42,7 @@ public class Test {
         LinkedList.main(args);
         CircularLinkedList.main(args);
         BinarySearchTree.main(args);
+        AVLTree.main(args);
 
         return true;
     }
