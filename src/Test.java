@@ -43,6 +43,8 @@ public class Test {
         CircularLinkedList.main(args);
         BinarySearchTree.main(args);
         AVLTree.main(args);
+        PriorityDequeuer.main(args);
+        PriorityEnquerer.main(args);
 
         return true;
     }
