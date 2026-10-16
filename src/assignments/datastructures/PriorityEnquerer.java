@@ -6,21 +6,17 @@ import adt.PriorityQueue;
  * PriorityEnquerer: A data structure representing a priority queue.
  * Irrespective of how items are added, the minimum remaining value is always removed next.
  *
- * Strategy: Maintain an array in enqueue order. When dequeueing,
- *  search the whole array for the smallest 
+ * Strategy: Maintain a vector in enqueue order. When dequeueing,
+ *  search the whole vector for the smallest 
  * @param <T>
  */
 public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<T> {
-    private T[] queue;
-    private int size;
-
+    private Vector<T> vector;
     /**
-     * This is just an empty PriorityEnqueuer with space 10 initially
+     * Initialize an empty priority queue
      */
-    @SuppressWarnings("unchecked")
     public PriorityEnquerer() {
-        this.queue = (T[]) new Comparable[10];
-        this.size = 0;
+        this.vector = new Vector<>();
     }
     /**
      * Dequeue remove an item from the queue. 
@@ -29,20 +25,14 @@ public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<
      * @return the smallest item left in the queue
      */
     public  T dequeue() {
-        int index = 0;
-        //finding the index with the smallest value
-        for (int i = 1; i < size; i ++) {
-            if (queue[i].compareTo(queue[index]) < 0) {
+        int index = 0;  
+        // Find the index with the smallest value
+        for (int i = 1; i < vector.length(); i ++) {
+            if (vector.at(i).compareTo(vector.at(index)) < 0) {
                 index = i;
             }
         }
-        T value = queue[index];
-        // Shifting the remaining items to fill that hole removed
-        for (int i = index; i < size - 1; i ++) {
-            queue[i] = queue[i + 1];
-        }
-        size --;
-        return value;
+        return vector.delete(index);
     }
     /**
      * Enqueue adds an item to the queue.
@@ -50,8 +40,7 @@ public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<
      * @param value the value to be added
      */
     public void enqueue(T value) {
-        queue[size] = value;
-        size ++;
+        vector.push(value);
     }
     /** 
      * IsEmpty checks if the collection is empty.
@@ -59,7 +48,7 @@ public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<
      * @return true iff the collection has no more items, otherwise false.
      */
     public boolean isEmpty() {
-        return size == 0;
+        return vector.isEmpty();
     }
     /**
      * Peek reports the next item to be removed from the queue
@@ -69,12 +58,13 @@ public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<
      */
     public T peek() {
         int index = 0;
-        for (int i = 1; i < size; i ++) {
-            if (queue[i].compareTo(queue[index]) < 0) {
+        // Find the index with the smallest value
+        for (int i = 1; i < vector.length(); i ++) {
+            if (vector.at(i).compareTo(vector.at(index)) < 0) {
                 index = i;
             }
         }
-        return queue[index];
+        return vector.at(index);
     }
     /**
      * Run validation tests.

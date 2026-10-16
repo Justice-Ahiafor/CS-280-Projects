@@ -11,16 +11,12 @@ import adt.PriorityQueue;
  * @param <T>
  */
 public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<T>{
-    private T[] queue;
-    private int size;
-
+    private Vector<T> vector;
     /**
-     * This is just an empty PriorityDequeuer with space 10 initially
+     * Initialize an empty priority queue
      */
-    @SuppressWarnings("unchecked") 
     public PriorityDequeuer() {
-        this.queue = (T[]) new Comparable[10];
-        this.size = 0;
+        this.vector = new Vector<>();
     }
     /**
      * Dequeue remove an item from the queue. 
@@ -32,10 +28,7 @@ public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<
         if (isEmpty()) {
             System.out.println("Queue is empty.");
         }
-        size --;
-        T value = queue[size];
-        queue[size] = null;
-        return value;
+        return vector.pop();
     }
     /**
      * Enqueue adds an item to the queue.
@@ -45,15 +38,10 @@ public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<
     public void enqueue(T value) {
         int index = 0;
         // Loop around to find where the value fits in
-        while (index < size && value.compareTo(queue[index]) < 0) {
+        while (index < vector.length() && value.compareTo(vector.at(index)) < 0) {
             index ++;
         }
-        // Shifting the elements to make room for the insertion value
-        for (int i = size; i > index; i --) {
-            queue[i] = queue[i - 1];
-        }
-        queue[index] = value;
-        size ++;
+        vector.insert(index, value);
     }
     /** 
      * IsEmpty checks if the collection is empty.
@@ -61,7 +49,7 @@ public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<
      * @return true iff the collection has no more items, otherwise false.
      */
     public boolean isEmpty() {
-        return size == 0;
+        return vector.isEmpty();
     }
     /**
      * Peek reports the next item to be removed from the queue
@@ -72,7 +60,7 @@ public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<
         if (isEmpty()) {
             System.out.println("Queue is empty.");
         }
-        return queue[size - 1];
+        return vector.peek();
     }
     /**
      * Run validation tests.
