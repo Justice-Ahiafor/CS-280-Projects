@@ -45,7 +45,8 @@ public class Test {
         AVLTree.main(args);
         PriorityDequeuer.main(args);
         PriorityEnquerer.main(args);
-
+        MinHeap.main(args);
+        
         return true;
     }
 }
