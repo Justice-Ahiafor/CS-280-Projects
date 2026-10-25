@@ -6,8 +6,8 @@ import adt.PriorityQueue;
  * PriorityDequeuer: A data structure representing a priority queue.
  * Irrespective of how items are added, the minimum remaining value is always removed next.
  *  
- * Strategy: Maintain an array in sorted order. Then, when dequeueing, 
- *  just pop off the last element in your array.
+ * Strategy: Maintain a vector in sorted order. Then, when dequeueing, 
+ *  just pop off the last element in your vector.
  * @param <T>
  */
 public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<T>{
@@ -71,5 +71,4 @@ public class PriorityDequeuer<T extends Comparable<T>> implements PriorityQueue<
 
         System.out.println("PriorityDequeuer passes all tests without errors.");
     }
-    
 }
