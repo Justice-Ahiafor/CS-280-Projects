@@ -34,6 +34,8 @@ public class Test {
         InsertionSort.main(args);
         QuickSort.main(args);
         MergeSort.main(args);
+        TreeSort.main(args);
+        HeapSort.main(args);
 
         // Test data structures.
         KeyValuePair.main(args);
