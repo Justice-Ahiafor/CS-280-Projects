@@ -280,7 +280,33 @@ public class MinHeap<T extends Comparable<T>> implements PriorityQueue<T>, Tree<
         PriorityQueue.validate(new MinHeap<Integer>());
         Tree.validate(new MinHeap<Integer>());
 
+        // Measuring Runtime
+        /*for (int N = 100; N <= 1000000; N *= 10) {
+
+            MinHeap<Integer> MinHeap1 = new MinHeap<>();
+            
+            for (int j = 0; j < N; j ++) {
+                int randomValue = (int) (Math.random() * N + 1);
+                MinHeap1.enqueue(randomValue);
+            }
+
+            long start = System.nanoTime();
+
+            MinHeap1.dequeue();
+
+            long end = System.nanoTime();
+
+            double duration = (end - start) / 1e9;
+
+            System.out.println(N + "\t" + duration);
+        }*/
+
         System.out.println("MinHeap passes all tests without errors.");
     }
     
 }
+// To run a file and add it to CSV
+// java -cp lib/* -ea src/assignments/algorithms/ERADemo.java >> dat/InsertionData.csv
+// To create a csv file
+// mkdir dat, meaning make directory!
+

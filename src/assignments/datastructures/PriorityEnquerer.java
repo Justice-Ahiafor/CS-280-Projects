@@ -73,8 +73,32 @@ public class PriorityEnquerer<T extends Comparable<T>> implements PriorityQueue<
     public static void main(String[] args) {
         PriorityQueue.validate(new PriorityEnquerer<Integer>());
 
-        System.out.println("PriorityEnquerer passes all tests without errors.");
+        // Measuring Runtime
+        /*for (int N = 100; N <= 1000000; N *= 10) {
 
+            PriorityEnquerer<Integer> PriorityEnquerer1 = new PriorityEnquerer<>();
+            
+            for (int j = 0; j < N; j ++) {
+                int randomValue = (int)(Math.random() * N + 1);
+                PriorityEnquerer1.enqueue(randomValue);
+            }
+
+            long start = System.nanoTime();
+
+            PriorityEnquerer1.dequeue();
+
+            long end = System.nanoTime();
+
+            double duration = (end - start) / 1e9;
+
+            System.out.println(N + "\t" + duration);
+        }*/
+
+        System.out.println("PriorityEnquerer passes all tests without errors.");
     }
     
 }
+// To run a file and add it to CSV
+// java -cp lib/* -ea src/assignments/algorithms/ERADemo.java >> dat/InsertionData.csv
+// To create a csv file
+// mkdir dat, meaning make directory!

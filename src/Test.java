@@ -49,6 +49,8 @@ public class Test {
         PriorityDequeuer.main(args);
         PriorityEnquerer.main(args);
         MinHeap.main(args);
+        VectorSet.main(args);
+        TreeSet.main(args);
         
         return true;
     }
