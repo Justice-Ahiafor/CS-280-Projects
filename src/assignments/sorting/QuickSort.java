@@ -81,25 +81,25 @@ public class QuickSort<T extends Comparable<T>> extends SortingAlgorithm<T> {
         SortingAlgorithm.validate(new QuickSort<Integer>());
         System.out.println("QuickSort has passed all tests.");
 
-        /*
         // Fill an array with random numbers
-        int N = 19999;
-        Integer[] array = new Integer[N];
-        for (int i = 0; i < array.length; i ++) {
-            array[i] = (int)(N*Math.random());
-        }
+        /*for (int N = 1000000; N <= 100000000; N += 24750000) {
+            Integer[] array = new Integer[N];
+            for (int i = 0; i < array.length; i ++) {
+                array[i] = (int)(N*Math.random());
+            }
 
-        // Measuring runtime.
-        SortingAlgorithm<Integer> sorter = new QuickSort<Integer>();
-        long start = System.nanoTime();
+            // Measuring runtime.
+            SortingAlgorithm<Integer> sorter = new QuickSort<Integer>();
+            long start = System.nanoTime();
 
-        sorter.sort(array);
-        long end = System.nanoTime();
-        double duration = (end - start)/(1e9);
+            sorter.sort(array);
+            long end = System.nanoTime();
+            double duration = (end - start)/(1e9);
 
-        System.out.println("Array size: "+N);
-        System.out.println("Total duration: "+duration);
-        */
-    }    
+            System.out.println(N + "\t" + duration);
 
+            // System.out.println("Array size: "+N);
+            // System.out.println("Total duration: "+duration);
+        }*/  
+    }
 }

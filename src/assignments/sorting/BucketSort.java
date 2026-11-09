@@ -56,25 +56,26 @@ public class BucketSort extends SortingAlgorithm<Integer> {
     public static void main(String[] args) {
         SortingAlgorithm.validate(new BucketSort());
         System.out.println("BucketSort has passed all tests.");
-        /*
+        
         // Fill an array with random numbers
-        int N = 199999;
-        Integer[] array = new Integer[N];
-        for (int i = 0; i < array.length; i ++) {
-            array[i] = (int)(N*Math.random());
-        }
+        /*for (int N = 100000000; N <= 1000000000; N += 225000000) {
+            Integer[] array = new Integer[N];
+            for (int i = 0; i < array.length; i ++) {
+                array[i] = (int)(N*Math.random());
+            }
 
-        // Measuring runtime.
-        SortingAlgorithm<Integer> sorter = new BucketSort();
-        long start = System.nanoTime();
+            // Measuring runtime.
+            SortingAlgorithm<Integer> sorter = new BucketSort();
+            long start = System.nanoTime();
 
-        sorter.sort(array);
-        long end = System.nanoTime();
-        double duration = (end - start)/(1e9);
+            sorter.sort(array);
+            long end = System.nanoTime();
+            double duration = (end - start)/(1e9);
 
-        System.out.println("Array size: "+N);
-        System.out.println("Total duration: "+duration);
-        */
-    } 
-    
+            System.out.println(N + "\t" + duration);
+
+            // System.out.println("Array size: "+N);
+            // System.out.println("Total duration: "+duration);
+        }*/
+    }   
 }

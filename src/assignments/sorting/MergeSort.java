@@ -97,5 +97,26 @@ public class MergeSort<T extends Comparable<T>> extends SortingAlgorithm<T>{
     public static void main(String[] args) {
         SortingAlgorithm.validate(new MergeSort<Integer>());
         System.out.println("MergeSort has passed all tests.");
+
+        // Fill an array with random numbers
+        /*for (int N = 1000000; N <= 100000000; N += 24750000) {
+            Integer[] array = new Integer[N];
+            for (int i = 0; i < array.length; i ++) {
+                array[i] = (int)(N*Math.random());
+            }
+
+            // Measuring runtime.
+            SortingAlgorithm<Integer> sorter = new MergeSort<Integer>();
+            long start = System.nanoTime();
+
+            sorter.sort(array);
+            long end = System.nanoTime();
+            double duration = (end - start)/(1e9);
+
+            System.out.println(N + "\t" + duration);
+
+            // System.out.println("Array size: "+N);
+            // System.out.println("Total duration: "+duration);
+        }*/
     }  
 }

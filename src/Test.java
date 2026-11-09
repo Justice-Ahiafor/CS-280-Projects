@@ -51,6 +51,7 @@ public class Test {
         MinHeap.main(args);
         VectorSet.main(args);
         TreeSet.main(args);
+        HashSet.main(args);
         
         return true;
     }

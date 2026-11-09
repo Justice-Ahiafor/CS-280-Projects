@@ -40,21 +40,27 @@ public class InsertionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
         System.out.println("InsertionSort has passed all tests.");
 
         // Fill an array with random numbers
-        int N = 19999;
-        Integer[] array = new Integer[N];
-        for (int i = 0; i < array.length; i ++) {
-            array[i] = (int)(N*Math.random());
-        }
+        /*for (int N = 1000000; N <= 100000000; N += 24750000) {
 
-        // Measuring runtime.
-        SortingAlgorithm<Integer> sorter = new InsertionSort<Integer>();
-        long start = System.nanoTime();
+            Integer[] array = new Integer[N];
+            for (int i = 0; i < array.length; i ++) {
+                array[i] = (int)(N*Math.random());
+            }
 
-        sorter.sort(array);
-        long end = System.nanoTime();
-        double duration = (end - start)/(1e9);
+            // Measuring runtime.
+            SortingAlgorithm<Integer> sorter = new InsertionSort<Integer>();
+            long start = System.nanoTime();
 
-        System.out.println("Array size: "+N);
-        System.out.println("Total duration: "+duration);
+            sorter.sort(array);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start)/(1e9);
+
+            System.out.println(N + "\t" + duration);
+
+            // System.out.println("Array size: "+N);
+            // System.out.println("Total duration: "+duration);
+        }*/
     } 
 }

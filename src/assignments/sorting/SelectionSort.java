@@ -47,24 +47,25 @@ public class SelectionSort<T extends Comparable<T>> extends SortingAlgorithm<T> 
         System.out.println("SelectionSort has passed all tests.");
 
         // Fill an array with random numbers
-        int N = 19999;
-        Integer[] array = new Integer[N];
-        for (int i = 0; i < array.length; i ++) {
-            array[i] = (int)(N*Math.random());
-        }
-        
-        // Measuring runtime.
-        SortingAlgorithm<Integer> sorter = new SelectionSort<Integer>();
-        long start = System.nanoTime();
+        /*for (int N = 10000; N <= 100000; N += 10000) {
+            Integer[] array = new Integer[N];
+            for (int i = 0; i < array.length; i ++) {
+                array[i] = (int)(N*Math.random());
+            }
+            
+            // Measuring runtime.
+            SortingAlgorithm<Integer> sorter = new SelectionSort<Integer>();
+            long start = System.nanoTime();
 
-        sorter.sort(array);
-        long end = System.nanoTime();
-        double duration = (end - start)/(1e9);
+            sorter.sort(array);
+            long end = System.nanoTime();
+            double duration = (end - start)/(1e9);
 
-        System.out.println("Array size: "+N);
-        System.out.println("Total duration: "+duration);
-    }
+            System.out.println(N + "\t" + duration);
 
-     
+            // System.out.println("Array size: "+N);
+            // System.out.println("Total duration: "+duration);
+        }*/
+    }     
 }
 
