@@ -37,6 +37,8 @@ public class Test {
         TreeSort.main(args);
         HeapSort.main(args);
         BucketSort.main(args);
+        ShellSort.main(args);
+        RadixSort.main(args);
 
         // Test data structures.
         KeyValuePair.main(args);
