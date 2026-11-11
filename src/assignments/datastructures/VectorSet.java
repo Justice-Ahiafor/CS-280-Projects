@@ -10,7 +10,7 @@ import adt.Set;
  * 
  * @param <T> the type of each element
  */
-public class VectorSet<T extends Comparable<T>> implements Set<T> {
+public class VectorSet<T> implements Set<T> {
     private Vector<T> vector;
     /**
      * Initialize an empty vector
