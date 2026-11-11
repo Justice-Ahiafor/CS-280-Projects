@@ -10,22 +10,21 @@ import adt.Set;
  * 
  * @param <T> the type of each element
  */
-public class HashSet<T extends Comparable<T>> implements Set<T> {
-    private Vector<T> [] M;     // # of buckets in array or the size of the hash table
-    private int N;              // # of items in the HashSet
-    private int D;              // # of items in any one bucket
+public class HashSet<T> implements Set<T> {
+    private Vector<VectorSet<T>> buckets;
+    private int N;
+    private static final int D = 5;
 
     /**
      * Initialize the HashSet
      */
-    @SuppressWarnings("unchecked")
     public HashSet() {
         N = 0;
-        D = 5;
 
-        M = new Vector[10];
-        for (int i = 0; i < M.length; i ++) {
-            M[i] = new Vector<>();
+        buckets = new Vector<>();
+
+        for (int i = 0; i < 10; i ++) {
+            buckets.push(new VectorSet<>());
         }
     }
     
@@ -33,45 +32,45 @@ public class HashSet<T extends Comparable<T>> implements Set<T> {
      * Hash function: takes any object and spits out array index
      * 
      * @param value the value to be hashed
-     * @param tableLength the current length of the array M
+     * @param tableLength the current length of bucket array
      * @return hashed index between 0 and (tableLength - 1)
      */
     private int hash(T value, int tableLength) {
         return Math.abs(value.hashCode()) % tableLength;
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Rehashes with twice as many buckets.
+     */
     private void rehash() {
-        int newD = M.length * 2;
-        Vector<T>[] newHashVectors = new Vector[newD];
+        Vector<VectorSet<T>> newBuckets = new Vector<>();
 
-        for (int i = 0; i < newD; i ++) {
-            newHashVectors[i] = new Vector<>();
+        int newSize = buckets.length() * 2;
+
+        for (int i = 0; i < newSize; i ++) {
+            newBuckets.push(new VectorSet<>());
         }
 
-        for (int i = 0; i < M.length; i ++) {
-            for (int j = 0; j < M[i].length(); j ++) {
-                T item = M[i].at(j);
-                int newIndex = hash(item, newD);
-                newHashVectors[newIndex].push(item);
+        for (int i = 0; i < buckets.length(); i ++) {
+            for (T item: buckets.at(i)) {
+                int newIndex = hash(item, newSize);
+                newBuckets.at(newIndex).add(item);
             }
         }
-        M = newHashVectors;
+        buckets = newBuckets;
     }
+
     /**
      * Creates an iterator that goes step by step
      * 
-     * The iterator visit items in forward order, starting with element at index 0 and
-     *  continues until all the elements have been done
-     *
-     * @return an iterator that produces items in a vector from first to last
+     * @return an iterator for everything in the set
      */
     public Iterator<T> iterator() {
         Vector<T> vector = new Vector<>();
 
-        for (int i = 0; i < M.length; i ++) {
-            for (int j = 0; j < M[i].length(); j ++) {
-                vector.push(M[i].at(j));
+        for (int i = 0; i < buckets.length(); i ++) {
+            for (T item: buckets.at(i)) {
+                vector.push(item);
             }
         }
         return vector.iterator();
@@ -85,14 +84,15 @@ public class HashSet<T extends Comparable<T>> implements Set<T> {
      */
     public boolean add(T value) {
         if (this.contains(value)) return false;
-        int currentIndex = hash(value, M.length);
+        int currentIndex = hash(value, buckets.length());
 
-        if (M[currentIndex].length() >= D) {
+        while (buckets.at(currentIndex).length() >= D) {
             rehash();
-            currentIndex = hash(value, M.length);
+            currentIndex = hash(value, buckets.length());
         }
-        M[currentIndex].push(value);
+        buckets.at(currentIndex).add(value);
         N ++;
+
         return true;
     }
 
@@ -103,8 +103,8 @@ public class HashSet<T extends Comparable<T>> implements Set<T> {
      * @return true iff the collection contains value
      */
     public boolean contains(T value) {
-        int currentIndex = hash(value, M.length);
-        return M[currentIndex].contains(value);
+        int currentIndex = hash(value, buckets.length());
+        return buckets.at(currentIndex).contains(value);
     }
 
     /**
@@ -123,26 +123,43 @@ public class HashSet<T extends Comparable<T>> implements Set<T> {
      * @param value the value to be removed
      */
     public boolean remove(T value) {
-        int currentIndex = hash(value, M.length);
-        Vector<T> vector = M[currentIndex];
+        int currentIndex = hash(value, buckets.length());
 
-        for (int i = 0; i < vector.length(); i ++) {
-            if (value.equals(vector.at(i))) {
-                vector.delete(i);
-                N --;
-                return true;
-            }
+        if (buckets.at(currentIndex).remove(value)) {
+            N --;
+            return true;
         }
+        
         return false;
     }
 
     /**
      * Run validation tests
-     * 
      * @param args command-line args
      */
     public static void main(String[] args) {
-        Set.validate(new HashSet<Integer>());         
+        Set.validate(new HashSet<Integer>());
+
+        HashSet<Integer> testHashSet = new HashSet<>();
+
+        for (int i = 0; i < 100; i += 1) {
+            assert testHashSet.add(i);
+        }
+
+        assert testHashSet.length() == 100;
+
+        assert testHashSet.contains(25);
+        assert testHashSet.contains(37);
+        assert testHashSet.contains(59);
+        assert testHashSet.contains(62);
+        assert testHashSet.contains(79);
+        assert testHashSet.contains(92);
+
+        assert !testHashSet.contains(100);
+
+        assert testHashSet.remove(37);
+
+        assert testHashSet.length() == 99;
         
         System.out.println("HashSet passes all tests without errors.");
     }
