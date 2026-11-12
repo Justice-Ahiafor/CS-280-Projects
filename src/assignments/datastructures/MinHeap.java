@@ -222,27 +222,25 @@ public class MinHeap<T extends Comparable<T>> implements PriorityQueue<T>, Tree<
      */
     public Iterator<T> postorder() {
         Vector<T> vectorResult = new Vector<>();
+        // Base case for an empty subtree
+        if (vector.isEmpty()) return vectorResult.iterator();
+
+        // Use stack
         Stack<Integer> stack = new LinkedList<>();
 
-        int currentIndex = 0;
-        int lastIndex = -1;
+        stack.push(0);
 
-        while (currentIndex < vector.length() || !stack.isEmpty()) {
-            if (currentIndex < vector.length()) {
-                stack.push(currentIndex);
-                currentIndex = leftChild(currentIndex);
-            }
-            else {
-                // Look on the top of the stack
-                int topmost = stack.peek();
-                if (rightChild(topmost) < vector.length() && lastIndex != rightChild(topmost)) {
-                    currentIndex = rightChild(topmost);
-                }
-                else {
-                    vectorResult.push(vector.at(topmost));
-                    lastIndex = stack.pop();
-                }
-            }
+        while (!stack.isEmpty()) {
+            // Top of the stack
+            int currentIndex = stack.pop();
+
+            vectorResult.insert(0, vector.at(currentIndex));
+
+            // I put the left child first because for a stack the right
+            //  child is on top and it can come out first.
+            if (leftChild(currentIndex) < vector.length()) stack.push(leftChild(currentIndex));
+            if (rightChild(currentIndex) < vector.length()) stack.push(rightChild(currentIndex));
+
         }
         return vectorResult.iterator();
     }
@@ -280,6 +278,38 @@ public class MinHeap<T extends Comparable<T>> implements PriorityQueue<T>, Tree<
         PriorityQueue.validate(new MinHeap<Integer>());
         Tree.validate(new MinHeap<Integer>());
 
+        // Took it from my BST and edited it to fit my MinHeap
+        // Build a sample tree.
+        Integer[] numbers = {4, -4, -6, 0, -6, -3, -5, 5, -6, 0, -3, -4, 3, -3, -5};
+        MinHeap<Integer> heap = new MinHeap<>();
+        for (Integer n: numbers) heap.enqueue(n);
+
+        // Check structure.
+        assert heap.length() == 15;
+        assert heap.degree() == 2;
+        assert heap.height() == 4;
+
+         // Check traversals.
+        assert testTraversal(heap.preorder(),   new int[]{-6, -6, -6, 5, 4, -3, 0, 0, -5, -4, -3, 3, -5, -3, -4});
+        assert testTraversal(heap.inorder(),    new int[]{5, -6, 4, -6, 0, -3, 0, -6, -3, -4, 3, -5, -3, -5, -4});
+        assert testTraversal(heap.postorder(),  new int[]{5, 4, -6, 0, 0, -3, -6, -3, 3, -4, -3, -4, -5, -5, -6});
+        assert testTraversal(heap.levelorder(), new int[]{-6, -6, -5, -6, -3, -4, -5, 5, 4, 0, 0, -3, 3, -3, -4});
+        assert testTraversal(heap.iterator(),   new int[]{5, -6, 4, -6, 0, -3, 0, -6, -3, -4, 3, -5, -3, -5, -4});
+
+        // My tests
+        MinHeap<Integer> heap1 = new MinHeap<>();
+
+        // Tests for add
+        heap1.enqueue(3);
+        heap1.enqueue(10);
+        heap1.enqueue(2);
+        heap1.enqueue(9);
+        heap1.enqueue(1);
+
+        assert heap1.dequeue() == 1;
+        assert heap1.dequeue() == 2;
+        assert heap1.dequeue() == 3;
+
         // Measuring Runtime
         /*for (int N = 100; N <= 1000000; N *= 10) {
 
@@ -302,6 +332,19 @@ public class MinHeap<T extends Comparable<T>> implements PriorityQueue<T>, Tree<
         }*/
 
         System.out.println("MinHeap passes all tests without errors.");
+    }
+    /**
+     * Convenience method to test tree traversals.
+     * @param iterator newly-constructed iterator
+     * @param array expected values
+     */
+    private static boolean testTraversal(Iterator<Integer> iterator, int[] array) {
+        boolean expected = true;
+        for (int i = 0; i < array.length; i ++) {
+            Integer next = iterator.next();
+            expected = expected && next.equals(array[i]);
+        }
+        return expected && !iterator.hasNext();
     }
     
 }
