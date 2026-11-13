@@ -162,6 +162,26 @@ public class HashSet<T> implements Set<T> {
         assert testHashSet.length() == 99;
         
         System.out.println("HashSet passes all tests without errors.");
+
+        // Fill an array with random numbers
+        /*for (int N = 1000000; N <= 100000000; N += 24750000) {
+            HashSet<Integer> set = new HashSet<>();
+
+            while (set.length() < N) {
+                set.add(1 + (int)(N*Math.random()));
+            }
+
+            // Measuring runtime.
+            long start = System.nanoTime();
+
+            set.contains(N + 1);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start)/(1e9);
+
+            System.out.println(N + "\t" + duration);
+        }*/
     }
     
 }

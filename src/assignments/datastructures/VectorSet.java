@@ -87,6 +87,27 @@ public class VectorSet<T> implements Set<T> {
         Set.validate(new VectorSet<Integer>());         
         
         System.out.println("VectorSet passes all tests without errors.");
+
+        // Fill an array with random numbers
+        /*for (int N = 1000000; N <= 100000000; N += 24750000) {
+            VectorSet<Integer> set = new VectorSet<>();
+
+            while (set.length() < N) {
+                set.add(1 + (int)(N*Math.random()));
+            }
+
+            // Measuring runtime.
+            long start = System.nanoTime();
+
+            set.contains(N + 1);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start)/(1e9);
+
+            System.out.println(N + "\t" + duration);
+        }*/
+
     }
     
 }

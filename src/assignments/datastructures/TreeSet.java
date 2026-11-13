@@ -3,6 +3,7 @@ package assignments.datastructures;
 import java.util.Iterator;
 
 import adt.Set;
+import adt.Tree;
 
 /**
  * TreeSet: A data structure representing a mathematical set.
@@ -76,8 +77,28 @@ public class TreeSet<T extends Comparable<T>> implements Set<T> {
      * @param args command-line args
      */
     public static void main(String[] args) {
-        Set.validate(new TreeSet<Integer>());         
+        // Set.validate(new TreeSet<Integer>());         
         
-        System.out.println("TreeSet passes all tests without errors.");
+        // System.out.println("TreeSet passes all tests without errors.");
+
+        // Fill an array with random numbers
+        for (int N = 10000; N <= 100000; N += 10000) {
+            TreeSet<Integer> set = new TreeSet<>();
+
+            while (set.length() < N) {
+                set.add(1 + (int)(N*Math.random()));
+            }
+
+            // Measuring runtime.
+            long start = System.nanoTime();
+
+            set.contains(N + 1);
+
+            long end = System.nanoTime();
+
+            double duration = (end - start)/(1e9);
+
+            System.out.println(N + "\t" + duration);
+        }
     }    
 }
